@@ -15,8 +15,8 @@ Este projeto tem como objetivo desenvolver e implementar um sistema robusto de c
 
 - **Microcontroladores:** ESP32 / ESP8266  
 - **Comunicação de longa distância:** LoRa E220 915MHz  
-- **Banco de dados:** InfluxDB  
-- **Protocolos:** HTTP / MQTT / LoRa  
+- **Banco de dados:** Firebase
+- **Protocolos:** HTTP / LoRa  
 - **Formato de dados:** JSON via biblioteca [ArduinoJson](https://arduinojson.org/)  
 
 ## 🧠 Funcionamento Geral
@@ -25,19 +25,15 @@ Este projeto tem como objetivo desenvolver e implementar um sistema robusto de c
    O ESP32 conectado a sensores meteorológicos coleta dados como temperatura, umidade, pressão, etc.
 
 2. **Transmissão**  
-   - Se houver Wi-Fi disponível, os dados são enviados diretamente via HTTP/MQTT.  
-   - Caso contrário, os dados são transmitidos via **LoRa** para um gateway remoto (até 10 km de distância).
+   - Os dados coletados são enviados da estação para uma base por **LoRa**;
 
 3. **Receptor**  
-   O segundo módulo ESP32 + LoRa, conectado à internet via Wi-Fi, recebe os dados e os envia para o banco de dados **InfluxDB**.
-
-4. **Visualização**  
-   Os dados são processados e exibidos em dashboards interativos para análise.
+   O segundo módulo ESP32 + LoRa, conectado à internet via Wi-Fi, recebe os dados e os envia para o banco de dados **Firebase**.
 
 ## 📡 Arquitetura do Sistema
 
 ```
-[Sensores + ESP32 + LoRa] --- (até 10 km) ---> [ESP32 + LoRa + Wi-Fi] ---> [Servidor InfluxDB]
+[Sensores + ESP32 + LoRa] --- (até 10 km) ---> [ESP32 + LoRa + Wi-Fi] ---> [Servidor Firebase]
 ```
 
 ## 🧱 Caixa Impressa em 3D
@@ -47,9 +43,9 @@ O modelo STL está disponível neste repositório: [`CloudIA.stl`](CloudIA.stl)
 
 ## 📊 Envio de Dados
 
-- Os dados são encapsulados em formato JSON  
-- Cada pacote inclui carimbo de tempo  
-- Envio via API REST para o banco InfluxDB  
+- Os dados são encapsulados em formato JSON;  
+- Cada pacote inclui carimbo de tempo;  
+- Envio via API Firebase ESP32 Client para o banco de dados Firebase.  
 
 ## 🧪 Testes Realizados
 
