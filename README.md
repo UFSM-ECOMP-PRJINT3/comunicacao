@@ -4,16 +4,19 @@ Este projeto tem como objetivo desenvolver e implementar um sistema robusto de c
 
 ## 📦 Estrutura do Projeto
 
-- `base_emissora.ino` – Código da base que recebe os dados via LoRa  
-- `arduino_sender_msg.ino` – Código do nó sensor que envia mensagens  
-- `arduino_recieve_msg.ino` – Código para testes de recepção LoRa  
-- `config_22db.ino` e `config_915MHz.ino` – Configuração dos módulos LoRa  
-- `get_config.ino` – Leitura de parâmetros dos módulos LoRa  
-- `CloudIA.stl` – Arquivo STL do modelo 3D da caixa protetora impressa para o conjunto ESP32 + LoRa  
+- `base_emissora.ino` – Código da base que emite os dados via LoRa coletados pelos sensores na estação
+- `base_receptora.ino` – Código da base que recebe os dados via LoRa e envia ao Firebase  
+- `arduino_sender_msg.ino` – Código de teste de envio de mensagem via LoRa  
+- `arduino_recieve_msg.ino` – Código de teste de recepção de mensagem via LoRa 
+- `config_22db.ino` – Configuração dos módulos LoRa para potência de 22 dB  
+- `config_915MHz.ino` – Configuração da frequência dos módulos LoRa para 915 MHz  
+- `get_config.ino` – Código de leitura dos parâmetros dos módulos LoRa  
+- `CloudIA.stl` – Modelo 3D da caixa protetora personalizada para ESP32 + LoRa  
+- `README.md` – Documentação geral do projeto  
 
 ## 🛠️ Tecnologias Utilizadas
 
-- **Microcontroladores:** ESP32 / ESP8266  
+- **Microcontroladores:** ESP32 
 - **Comunicação de longa distância:** LoRa E220 915MHz  
 - **Banco de dados:** Firebase
 - **Protocolos:** HTTP / LoRa  
@@ -57,13 +60,14 @@ O modelo STL está disponível neste repositório: [`CloudIA.stl`](CloudIA.stl)
 
 ## 🧠 Desafios Enfrentados e Soluções
 
-| Desafio                        | Solução Adotada                      |
-|-------------------------------|--------------------------------------|
-| Falta de Wi-Fi no local       | Uso de módulos LoRa E220             |
-| Alto consumo de energia       | Uso de `deep sleep` no ESP32         |
-| Perda de pacotes              | Reenvio automático de pacotes        |
-| Segurança na transmissão      | Implementação de criptografia        |
-| Integração com servidor       | Testes incrementais com InfluxDB     |
+| Desafio                        | Solução Adotada / Sugestão                                        |
+|-------------------------------|--------------------------------------------------------------------|
+| Falta de Wi-Fi no local       | ✅ Uso de módulos LoRa E220                                       |
+| Alto consumo de energia       | 🔧 Sugestão futura: Implementação de `deep sleep` no ESP32        |
+| Perda de pacotes              | 🔧 Sugestão futura: Reenvio automático e verificação CRC          |
+| Segurança na transmissão      | 🔧 Sugestão futura: Implementação de criptografia AES              |
+| Integração com banco de dados | ✅ Firebase usado com autenticação por token                       |
+| Integração com InfluxDB       | ❌ Não implementado (foi priorizado o Firebase)                    |
 
 ## 👨‍💻 Equipe
 
@@ -75,9 +79,9 @@ O modelo STL está disponível neste repositório: [`CloudIA.stl`](CloudIA.stl)
 
 ## 📚 Recursos Úteis
 
-- Biblioteca LoRa:  
-  https://github.com/xreef/EByte_LoRa_E220_Series_Library  
-- Biblioteca ArduinoJson:  
+- Firebase ESP32 Client:
+  https://github.com/mobizt/Firebase-ESP-Client/
+- Biblioteca ArduinoJson:
   https://arduinojson.org/
 
 ## 🎥 Demonstração em Vídeo
